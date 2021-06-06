@@ -20,6 +20,21 @@ services:
     networks:
       - monitoring
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    user: "1000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - '3000:3000'
+    networks:
+      - monitoring
+
 networks:
   monitoring:
     name: monitoring
