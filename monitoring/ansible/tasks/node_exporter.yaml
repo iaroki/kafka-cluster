@@ -1,0 +1,21 @@
+- name: Copy Node Exporter service file
+  template:
+    src: "files/node_exporter.service"
+    dest: "/etc/systemd/system/node_exporter.service"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Pull Node Exporter image
+  docker_image:
+    name: quay.io/prometheus/node-exporter
+    tag: latest
+    source: pull
+    state: present
+
+- name: Start Node Exporter service
+  systemd:
+    name: "node_exporter.service"
+    state: started
+    enabled: yes
+    daemon_reload: yes

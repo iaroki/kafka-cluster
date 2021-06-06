@@ -1,0 +1,23 @@
+- name: Set fs.inotify.max_user_watches
+  sysctl:
+    name: fs.inotify.max_user_watches
+    value: "4000000"
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Set fs.file-max
+  sysctl:
+    name: fs.file-max
+    sysctl_set: yes
+    value: "4000000"
+    state: present
+    reload: yes
+
+- name: Set vm.max_map_count
+  sysctl:
+    name: vm.max_map_count
+    sysctl_set: yes
+    value: "500000"
+    state: present
+    reload: yes

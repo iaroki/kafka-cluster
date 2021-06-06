@@ -1,0 +1,22 @@
+[Unit]
+Description=Node Exporter Docker container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=3
+Restart=always
+ExecStartPre=-/usr/bin/docker kill node_exporter
+ExecStartPre=-/usr/bin/docker rm node_exporter
+ExecStart=/usr/bin/docker run --rm \
+                              --name node_exporter \
+                              --network host \
+                              --pid host \
+                              --privileged \
+                              -v /:/host:ro,rslave \
+                              quay.io/prometheus/node-exporter:latest \
+                              --path.rootfs=/host
+ExecStop=/usr/bin/docker kill node_exporter
+
+[Install]
+WantedBy=multi-user.target

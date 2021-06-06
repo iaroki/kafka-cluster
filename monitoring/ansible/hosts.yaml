@@ -1,0 +1,24 @@
+---
+prod:
+  hosts:
+    broker1:
+      ansible_host: 192.168.99.11
+      ansible_port: 22
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: ../../kafka/.vagrant/machines/broker1/virtualbox/private_key
+      ansible_python_interpreter: /usr/bin/python3
+
+    broker2:
+      ansible_host: 192.168.99.12
+      ansible_port: 22
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: ../../kafka/.vagrant/machines/broker2/virtualbox/private_key
+      ansible_python_interpreter: /usr/bin/python3
+
+    broker3:
+      ansible_host: 192.168.99.13
+      ansible_port: 22
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: ../../kafka/.vagrant/machines/broker3/virtualbox/private_key
+      ansible_python_interpreter: /usr/bin/python3
+

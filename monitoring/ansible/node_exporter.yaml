@@ -1,0 +1,8 @@
+---
+- hosts: prod
+  become: yes
+
+  tasks:
+    - include_tasks: tasks/dependencies.yaml
+    - include_tasks: tasks/system.yaml
+    - include_tasks: tasks/node_exporter.yaml
