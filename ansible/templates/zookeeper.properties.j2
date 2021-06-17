@@ -6,9 +6,9 @@ initLimit=10
 syncLimit=5
 tickTime=2000
 # list of servers
-server.1={{ hostvars['kafka-node1']['ansible_host'] }}:{{ zookeeper_election }}
-server.2={{ hostvars['kafka-node2']['ansible_host'] }}:{{ zookeeper_election }}
-server.3={{ hostvars['kafka-node3']['ansible_host'] }}:{{ zookeeper_election }}
+server.1={{ hostvars['broker1']['ansible_host'] }}:{{ zookeeper_election }}
+server.2={{ hostvars['broker2']['ansible_host'] }}:{{ zookeeper_election }}
+server.3={{ hostvars['broker3']['ansible_host'] }}:{{ zookeeper_election }}
 #auth
 authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
 requireClientAuthScheme=sasl
