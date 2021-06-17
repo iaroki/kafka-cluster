@@ -8,6 +8,7 @@
     zookeeper_port: 12181
     kafka_port: 19092
     kafka_heap_opts: -Xmx1G -Xms1G
+    kafka_opts: "-XX:ErrorFile=/opt/kafka/logs/hs_err_pid_%p.log -Djava.security.auth.login.config=/opt/kafka/config/kafka_jaas.conf"
     kafka_user: KAFKAADMINUSER
     kafka_pass: KAFKAADMINPASS
     zookeeper_user: ZOOADMINUSER

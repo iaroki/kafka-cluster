@@ -1,6 +1,6 @@
 - name: Restart Kafka service
   systemd:
     name: "kafka-{{ env }}.service"
-    state: started
+    state: restarted
     enabled: yes
     daemon_reload: yes

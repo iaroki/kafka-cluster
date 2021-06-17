@@ -12,6 +12,7 @@ ExecStart=/usr/bin/docker run --rm --name kafka-{{ env }} \
                           --net host \
                           -e JMX_PORT={{ jmx_port }} \
                           -e KAFKA_HEAP_OPTS="{{ kafka_heap_opts }}" \
+                          -e KAFKA_OPTS="{{ kafka_opts }}" \
                           -v /opt/kafka-{{ env }}/config/server.properties:/opt/kafka/config/server.properties \
                           -v /opt/kafka-{{ env }}/config/kafka_jaas.conf:/opt/kafka/config/kafka_jaas.conf \
                           -v /opt/kafka-{{ env }}/data:/data \
