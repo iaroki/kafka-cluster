@@ -4,12 +4,15 @@
   vars:
     ver: 2.7.0
     env: prod
-    jmx_prom: 0.15.0
+    prom_ver: 0.15.0
+    prom_port: 7071
     jmx_port: 19989
     zookeeper_port: 12181
     kafka_port: 19092
     kafka_heap_opts: -Xmx1G -Xms1G
-    kafka_opts: "-XX:ErrorFile=/opt/kafka/logs/hs_err_pid_%p.log -Djava.security.auth.login.config=/opt/kafka/config/kafka_jaas.conf -javaagent:/opt/kafka/prom/prometheus_0.15.0.jar=7071:/opt/kafka/prom/prometheus.yml"
+    kafka_opts_err: -XX:ErrorFile=/opt/kafka/logs/hs_err_pid_%p.log
+    kafka_opts_auth: -Djava.security.auth.login.config=/opt/kafka/config/kafka_jaas.conf
+    kafka_opts_jmx: -javaagent:/opt/kafka/prom/prometheus_0.15.0.jar=7071:/opt/kafka/prom/prometheus.yml"
     kafka_user: KAFKAADMINUSER
     kafka_pass: KAFKAADMINPASS
     zookeeper_user: ZOOADMINUSER

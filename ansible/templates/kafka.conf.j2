@@ -1,0 +1,3 @@
+KAFKA_OPTS=-XX:ErrorFile=/opt/kafka/logs/hs_err_pid_%p.log -Djava.security.auth.login.config=/opt/kafka/config/kafka_jaas.conf -javaagent:/opt/kafka/prom/prometheus_{{ prom_ver }}.jar={{ prom_port }}:/opt/kafka/prom/prometheus.yml
+KAFKA_HEAP_OPTS={{ kafka_heap_opts }}
+JMX_PORT={{ jmx_port }}

@@ -29,6 +29,15 @@
     mode: 0644
   notify: Restart Kafka service
 
+- name: Copy Kafka environment config
+  template:
+    src: "templates/kafka.conf.j2"
+    dest: "/opt/kafka-{{ env }}/config/kafka.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Kafka service
+
 - name: Copy Kafka service file
   template:
     src: "templates/kafka.service.j2"
@@ -48,8 +57,8 @@
 
 - name: Get JMX Prometheus agent
   get_url:
-    url: "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/{{ jmx_prom }}/jmx_prometheus_javaagent-{{ jmx_prom }}.jar"
-    dest: "/opt/kafka-{{ env }}/prom/prometheus_{{ jmx_prom }}.jar"
+    url: "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/{{ prom_ver }}/jmx_prometheus_javaagent-{{ prom_ver }}.jar"
+    dest: "/opt/kafka-{{ env }}/prom/prometheus_{{ prom_ver }}.jar"
     owner: root
     group: root
     mode: 0644
