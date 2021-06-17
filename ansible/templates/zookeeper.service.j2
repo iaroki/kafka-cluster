@@ -1,0 +1,21 @@
+[Unit]
+Description=Zookeeper Docker container
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+TimeoutStartSec=5
+Restart=always
+ExecStartPre=-/usr/bin/docker stop zookeeper-{{ env }}
+ExecStartPre=-/usr/bin/docker rm zookeeper-{{ env }}
+ExecStart=/usr/bin/docker run --rm --name zookeeper-{{ env }} \
+                          --net host \
+                          -v /opt/zookeeper-{{ env }}/config/zookeeper.properties:/opt/kafka/config/zookeeper.properties \
+                          -v /opt/zookeeper-{{ env }}/config/zookeeper_jaas.conf:/opt/kafka/config/zookeeper_jaas.conf \
+                          -v /opt/zookeeper-{{ env }}/data/zookeeper:/data/zookeeper \
+                          -v /opt/zookeeper-{{ env }}/logs:/opt/kafka/logs \
+                          iaroki/zookeeper:{{ ver }}
+ExecStop=/usr/bin/docker stop zookeeper-{{ env }}
+ 
+[Install]
+WantedBy=multi-user.target

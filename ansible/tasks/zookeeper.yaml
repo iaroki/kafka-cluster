@@ -1,0 +1,45 @@
+- name: Create Zookeeper dirs
+  file:
+    path: "/opt/zookeeper-{{ env }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+  loop:
+    - data/zookeeper
+    - config
+    - logs
+
+- name: Copy Zookeeper JAAS config
+  template:
+    src: "templates/zookeeper_jaas.conf.j2"
+    dest: "/opt/zookeeper-{{ env }}/config/zookeeper_jaas.conf"
+
+- name: Copy Zookeeper config
+  template:
+    src: "templates/zookeeper.properties.j2"
+    dest: "/opt/zookeeper-{{ env }}/config/zookeeper.properties"
+
+- name: Copy Zookeeper id
+  template:
+    src: "templates/myid.j2"
+    dest: "/opt/zookeeper-{{ env }}/data/zookeeper/myid"
+
+- name: Copy Zookeeper service file
+  template:
+    src: "templates/zookeeper.service.j2"
+    dest: "/etc/systemd/system/zookeeper-{{ env }}.service"
+
+- name: Pull Zookeeper image
+  docker_image:
+    name: iaroki/zookeeper
+    tag: "{{ ver }}"
+    source: pull
+    state: present
+
+- name: Start Zookeeper service
+  systemd:
+    name: "zookeeper-{{ env }}.service"
+    state: started
+    enabled: yes
+    daemon_reload: yes
