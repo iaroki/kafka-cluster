@@ -13,3 +13,6 @@
     - include_tasks: tasks/dependencies.yaml
     - include_tasks: tasks/system.yaml
     - include_tasks: tasks/zookeeper.yaml
+
+  handlers:
+    - include: handlers/zookeeper.yaml

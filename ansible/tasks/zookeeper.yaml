@@ -14,21 +14,25 @@
   template:
     src: "templates/zookeeper_jaas.conf.j2"
     dest: "/opt/zookeeper-{{ env }}/config/zookeeper_jaas.conf"
+  notify: Restart Zookeeper service
 
 - name: Copy Zookeeper config
   template:
     src: "templates/zookeeper.properties.j2"
     dest: "/opt/zookeeper-{{ env }}/config/zookeeper.properties"
+  notify: Restart Zookeeper service
 
 - name: Copy Zookeeper id
   template:
     src: "templates/myid.j2"
     dest: "/opt/zookeeper-{{ env }}/data/zookeeper/myid"
+  notify: Restart Zookeeper service
 
 - name: Copy Zookeeper service file
   template:
     src: "templates/zookeeper.service.j2"
     dest: "/etc/systemd/system/zookeeper-{{ env }}.service"
+  notify: Restart Zookeeper service
 
 - name: Pull Zookeeper image
   docker_image:
@@ -36,10 +40,4 @@
     tag: "{{ ver }}"
     source: pull
     state: present
-
-- name: Start Zookeeper service
-  systemd:
-    name: "zookeeper-{{ env }}.service"
-    state: started
-    enabled: yes
-    daemon_reload: yes
+  notify: Restart Zookeeper service

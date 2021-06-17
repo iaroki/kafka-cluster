@@ -1,0 +1,6 @@
+- name: Restart Zookeeper service
+  systemd:
+    name: "zookeeper-{{ env }}.service"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
