@@ -1,0 +1,17 @@
+---
+- hosts: prod
+  become: yes
+  vars:
+    ver: 2.7.0
+    env: prod
+    jmx_port: 19989
+    kafka_port: 19092
+    kafka_user: KAFKAADMINUSER
+    kafka_pass: KAFKAADMINPASS
+    zookeeper_user: ZOOADMINUSER
+    zookeeper_pass: ZOOADMINPASS
+
+  tasks:
+    - include_tasks: tasks/dependencies.yaml
+    - include_tasks: tasks/system.yaml
+    - include_tasks: tasks/kafka.yaml

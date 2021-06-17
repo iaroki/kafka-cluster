@@ -1,0 +1,24 @@
+[Unit]
+Description=Kafka Broker Docker container
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+TimeoutStartSec=5
+Restart=always
+ExecStartPre=-/usr/bin/docker stop kafka-{{ env }}
+ExecStartPre=-/usr/bin/docker rm kafka-{{ env }}
+ExecStart=/usr/bin/docker run --rm --name kafka-{{ env }} \
+                          --net host \
+                          -e JMX_PORT={{ jmx_port }} \
+                          -e KAFKA_HEAP_OPTS="-Xmx6G -Xms6G" \
+                          -v /opt/kafka-{{ env }}/config/server.properties:/opt/kafka/config/server.properties \
+                          -v /opt/kafka-{{ env }}/config/kafka_jaas.conf:/opt/kafka/config/kafka_jaas.conf \
+                          -v /opt/kafka-{{ env }}/data:/data \
+                          -v /opt/kafka-{{ env }}/logs:/opt/kafka/logs \
+                          iaroki/kafka:{{ ver }}
+ExecStop=/usr/bin/docker stop kafka-{{ env }}
+ 
+[Install]
+WantedBy=multi-user.target
+
