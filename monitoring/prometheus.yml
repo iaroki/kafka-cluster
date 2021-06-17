@@ -9,3 +9,8 @@ scrape_configs:
       - targets: ['192.168.99.12:9100']
       - targets: ['192.168.99.13:9100']
 
+  - job_name: 'kafka_brokers'
+    static_configs:
+      - targets: ['192.168.99.11:7071']
+      - targets: ['192.168.99.12:7071']
+      - targets: ['192.168.99.13:7071']
