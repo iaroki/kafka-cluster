@@ -9,6 +9,7 @@
     - data
     - config
     - logs
+    - prom
 
 - name: Copy Kafka JAAS config
   template:
@@ -44,3 +45,19 @@
     source: pull
     state: present
   notify: Restart Kafka service
+
+- name: Get JMX Prometheus agent
+  get_url:
+    url: "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/{{ jmx_prom }}/jmx_prometheus_javaagent-{{ jmx_prom }}.jar"
+    dest: "/opt/kafka-{{ env }}/prom/prometheus_{{ jmx_prom }}.jar"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy JMX Prometheus config
+  template:
+    src: "files/prometheus.yml"
+    dest: "/opt/kafka-{{ env }}/prom/prometheus.yml"
+    owner: root
+    group: root
+    mode: 0644

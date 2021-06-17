@@ -17,6 +17,7 @@ ExecStart=/usr/bin/docker run --rm --name kafka-{{ env }} \
                           -v /opt/kafka-{{ env }}/config/kafka_jaas.conf:/opt/kafka/config/kafka_jaas.conf \
                           -v /opt/kafka-{{ env }}/data:/data \
                           -v /opt/kafka-{{ env }}/logs:/opt/kafka/logs \
+                          -v /opt/kafka-{{ env }}/prom:/opt/kafka/prom \
                           iaroki/kafka:{{ ver }}
 ExecStop=/usr/bin/docker stop kafka-{{ env }}
  
