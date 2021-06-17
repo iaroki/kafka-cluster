@@ -7,6 +7,7 @@
     jmx_port: 19989
     zookeeper_port: 12181
     kafka_port: 19092
+    kafka_heap_opts: -Xmx1G -Xms1G
     kafka_user: KAFKAADMINUSER
     kafka_pass: KAFKAADMINPASS
     zookeeper_user: ZOOADMINUSER
