@@ -5,6 +5,7 @@
     ver: 2.7.0
     env: prod
     jmx_port: 19989
+    zookeeper_port: 12181
     kafka_port: 19092
     kafka_user: KAFKAADMINUSER
     kafka_pass: KAFKAADMINPASS
