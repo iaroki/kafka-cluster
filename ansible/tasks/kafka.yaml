@@ -14,16 +14,19 @@
   template:
     src: "templates/kafka_jaas.conf.j2"
     dest: "/opt/kafka-{{ env }}/config/kafka_jaas.conf"
+  notify: Restart Kafka service
 
 - name: Copy Kafka config
   template:
-    src: "templates/server_local.properties.j2"
+    src: "templates/server.properties.j2"
     dest: "/opt/kafka-{{ env }}/config/server.properties"
+  notify: Restart Kafka service
 
 - name: Copy Kafka service file
   template:
-    src: "templates/kafka_local.service.j2"
+    src: "templates/kafka.service.j2"
     dest: "/etc/systemd/system/kafka-{{ env }}.service"
+  notify: Restart Kafka service
 
 - name: Pull Kafka image
   docker_image:
@@ -31,10 +34,4 @@
     tag: "{{ ver }}"
     source: pull
     state: present
-
-- name: Start Kafka service
-  systemd:
-    name: "kafka-{{ env }}.service"
-    state: started
-    enabled: yes
-    daemon_reload: yes
+  notify: Restart Kafka service

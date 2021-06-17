@@ -15,3 +15,6 @@
     - include_tasks: tasks/dependencies.yaml
     - include_tasks: tasks/system.yaml
     - include_tasks: tasks/kafka.yaml
+
+  handlers:
+    - include: handlers/kafka.yaml
